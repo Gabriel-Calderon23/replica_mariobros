@@ -1,6 +1,6 @@
 function createAnimations() {
 
-    //> Mario animations
+    //> Animaciones de Mario
     this.anims.create({
         key: 'idle',
         frames: [{ key: 'mario', frame: 0 }]
@@ -20,7 +20,7 @@ function createAnimations() {
         frames: [{ key: 'mario', frame: 5 }]
     });
 
-    //> Grown Mario animations
+    //> Animaciones de Mario Crecido
     this.anims.create({
         key: 'grown-mario-idle',
         frames: [{ key: 'mario-grown', frame: 0 }]
@@ -40,7 +40,7 @@ function createAnimations() {
         frames: [{ key: 'mario-grown', frame: 5 }]
     });
 
-    //> Fire Mario animations
+    //> Animaciones de Mario de Fuego
     this.anims.create({
         key: 'fire-mario-idle',
         frames: [{ key: 'mario-fire', frame: 0 }]
@@ -64,7 +64,7 @@ function createAnimations() {
         frames: [{ key: 'mario-fire', frame: 6 }]
     });
 
-    //> Goomba animations
+    //> Animaciones de Goomba
     this.anims.create({
         key: 'goomba-idle',
         frames: [{ key: 'goomba', frame: 1 }]
@@ -80,7 +80,7 @@ function createAnimations() {
         frames: [{ key: 'goomba', frame: 2 }]
     });
     
-    //> koopas animations
+    //> Animaciones de Koopas
     this.anims.create({
         key: 'koopa-idle',
         frames: [{ key: 'koopa', frame: 1 }]
@@ -100,7 +100,7 @@ function createAnimations() {
         frames: [{ key: 'koopa', frame: 1 }]
     });
 
-    //> Coins
+    //> Monedas
     this.anims.create({
         key: 'coin-default',
         frames: this.anims.generateFrameNumbers('coin', { start: 0, end: 3 }),
@@ -108,7 +108,7 @@ function createAnimations() {
         repeat: -1
     });
 
-    //> Ground coin
+    //> Moneda de suelo
     this.anims.create({
         key: 'ground-coin-default',
         frames: this.anims.generateFrameNumbers('ground-coin', { start: 2, end: 0 }),
@@ -117,7 +117,7 @@ function createAnimations() {
         repeatDelay: 5
     });
 
-    //> Mistery blocks
+    //> Bloques misteriosos
     this.anims.create({
         key: 'mistery-block-default',
         frames: this.anims.generateFrameNumbers('mistery-block', { start: 2, end: 0 }),
@@ -126,16 +126,7 @@ function createAnimations() {
         repeatDelay: 5
     });
 
-    //> Custom blocks
-    this.anims.create({
-        key: 'custom-block-default',
-        frames: this.anims.generateFrameNumbers('custom-block', { start: 2, end: 0 }),
-        frameRate: 5,
-        repeat: -1,
-        repeatDelay: 5
-    });
-
-    //> Brick debris
+    //> Escombros de ladrillo
     this.anims.create({
         key: 'brick-debris-default',
         frames: this.anims.generateFrameNumbers('brick-debris', { start: 0, end: 3 }),
@@ -143,7 +134,7 @@ function createAnimations() {
         repeat: -1,
     });
 
-    //> Fireflower
+    //> Flor de fuego
     this.anims.create({
         key: 'fire-flower-default',
         frames: this.anims.generateFrameNumbers('fire-flower', { start: 0, end: 3 }),
@@ -151,7 +142,7 @@ function createAnimations() {
         repeat: -1,
     });
 
-    //> Fireball
+    //> Bola de fuego
     this.anims.create({
         key: 'fireball-left-down',
         frames: [{ key: 'fireball', frame: 0 }]

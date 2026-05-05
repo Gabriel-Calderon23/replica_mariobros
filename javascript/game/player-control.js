@@ -1,6 +1,6 @@
 
 function createPlayer() {
-    // Draw player
+    // Dibujar jugador
     player = this.physics.add.sprite( /*screenWidth * 1.5*/ startOffset, screenHeight - platformHeight, 'mario').setOrigin(1).setBounce(0)
     .setCollideWorldBounds(true).setScale(screenHeight / 376);
     player.depth = 3;
@@ -66,7 +66,7 @@ function applyPlayerInvulnerability(time) {
 
 function updatePlayer(delta) {
 
-    // Win animation
+    // Animación de victoria
     if (playerBlocked && flagRaised) {
         player.setVelocityX(screenWidth / 8.5);
         if (playerState == 0)
@@ -97,7 +97,7 @@ function updatePlayer(delta) {
     if (player.body.blocked.left || player.body.blocked.right)
         player.setVelocityX(0);
 
-    // Check if player has fallen
+    // Verificar si el jugador ha caído
     if (player.y > screenHeight - 10 || timeLeft <= 0) {
         gameOver = true;
         gameOverFunc.call(this);
@@ -107,7 +107,7 @@ function updatePlayer(delta) {
     if (playerBlocked)
         return;
 
-    // Player controls
+    // Controles del jugador
     // https://github.com/photonstorm/phaser3-examples/blob/master/public/src/tilemap/collision/matter%20destroy%20tile%20bodies.js#L323
     // https://codepen.io/rexrainbow/pen/oyqvQY
 
@@ -137,8 +137,8 @@ function updatePlayer(delta) {
 
         playerController.direction.positive = false;
         
-        // Lerp the velocity towards the max run using the smoothed controls.
-        // This simulates a player controlled acceleration.
+        // Interpolar la velocidad hacia la máxima carrera usando controles suavizados.
+        // Esto simula una aceleración controlada por el jugador.
         oldVelocityX = player.body.velocity.x;
         targetVelocityX = -playerController.speed.run;
         newVelocityX = Phaser.Math.Linear(oldVelocityX, targetVelocityX, -smoothedControls.value);
@@ -159,8 +159,8 @@ function updatePlayer(delta) {
 
         playerController.direction.positive = true;
 
-        // Lerp the velocity towards the max run using the smoothed controls.
-        // This simulates a player controlled acceleration.
+        // Interpolar la velocidad hacia la máxima carrera usando controles suavizados.
+        // Esto simula una aceleración controlada por el jugador.
         oldVelocityX = player.body.velocity.x;
         targetVelocityX = playerController.speed.run;
         newVelocityX = Phaser.Math.Linear(oldVelocityX, targetVelocityX, smoothedControls.value);
@@ -212,7 +212,7 @@ function updatePlayer(delta) {
         return;
     }
 
-    // Apply jump animation
+    // Aplicar animación de salto
     if (!player.body.touching.down) {
         if (!playerFiring) {
             if (playerState == 0)

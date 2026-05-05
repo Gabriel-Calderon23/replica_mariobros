@@ -180,7 +180,7 @@ function generateStructure(pieceStart) {
     }
 }
 
-// Function to generate structure based on predefined map value
+// Función para generar estructura basada en el valor del mapa predefinido
 function generateStructureFromMap(pieceStart, structureType) {
     //> Generate structure from predefined map value and add it to their blocksGroup
 

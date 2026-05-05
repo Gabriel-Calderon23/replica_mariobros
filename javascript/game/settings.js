@@ -139,7 +139,7 @@ function drawSettingsMenu() {
     controlsText.depth = 5;
     this.settingsMenuObjects.add(controlsText);
 
-    // Special thanks to chatGPT for making this list for me
+    // Agradecimientos especiales a chatGPT por hacer esta lista para mí
     const specialCharMap = {
         8: 'BACKSPACE',
         9: 'TAB',

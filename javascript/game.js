@@ -14,7 +14,7 @@ var config = {
     type: Phaser.AUTO,
     width: screenWidth,
     height: screenHeight,
-    backgroundColor: 0x8585FF,
+    backgroundColor: '#049cd8',
     parent: 'game',
     preserveDrawingBuffer: true,
     physics: {
@@ -38,13 +38,13 @@ const platformHeight = screenHeight / 5;
 
 const startOffset = screenWidth / 2.5;
 
-// Hole with is calculated dividing the world width in x holes of the same size.
+// El ancho del agujero se calcula dividiendo el ancho del mundo en x agujeros del mismo tamaño.
 const platformPieces = 100;
 const platformPiecesWidth = (worldWidth - screenWidth) / platformPieces;
 
 var isLevelOverworld;
 
-// Create empty holes array, every hole will have their object with the hole start and end
+// Crear array vacío de agujeros, cada agujero tendrá su objeto con el inicio y fin del agujero
 var worldHolesCoords = [];
 
 var emptyBlocksList = [];
@@ -86,7 +86,6 @@ function isMobileDevice() {
     return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 }
 
-// Source: https://github.com/photonstorm/phaser3-examples/blob/master/public/src/tilemap/collision/matter%20destroy%20tile%20bodies.js#L35
 
 var SmoothedHorionztalControl = new Phaser.Class({
 
@@ -151,20 +150,20 @@ function preload() {
         loadingGif.forEach(gif => {gif.style.display = 'none';});
     });
 
-    // Load Fonts
+    // Cargar Fuentes
     this.load.bitmapFont('carrier_command', 'assets/fonts/carrier_command.png', 'assets/fonts/carrier_command.xml');
 
-    // Load plugins
+    // Cargar complementos
     this.load.plugin('rexvirtualjoystickplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexvirtualjoystickplugin.min.js', true);
     this.load.plugin('rexcheckboxplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexcheckboxplugin.min.js', true);
     this.load.plugin('rexsliderplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexsliderplugin.min.js', true);
     this.load.plugin('rexkawaseblurpipelineplugin', 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexkawaseblurpipelineplugin.min.js', true);
 
-    isLevelOverworld = Phaser.Math.Between(0, 100) <= 84;
+    isLevelOverworld = Phaser.Math.Between(0, 1) === 1;
 
     let levelStyle = isLevelOverworld ? 'overworld' : 'underground';
 
-    // Load entities sprites
+    // Cargar sprites de entidades
     this.load.spritesheet('mario', 'assets/entities/mario.png', { frameWidth: 18, frameHeight: 16 });
     this.load.spritesheet('mario-grown', 'assets/entities/mario-grown.png', { frameWidth: 18, frameHeight: 32 });
     this.load.spritesheet('mario-fire', 'assets/entities/mario-fire.png', { frameWidth: 18, frameHeight: 32 });
@@ -172,11 +171,11 @@ function preload() {
     this.load.spritesheet('koopa', 'assets/entities/koopa.png', { frameWidth: 16, frameHeight: 24 });
     this.load.spritesheet('shell', 'assets/entities/shell.png', { frameWidth: 16, frameHeight: 15 });
 
-    // Load objects sprites
+    // Cargar sprites de objetos
     this.load.spritesheet('fireball', 'assets/entities/fireball.png', { frameWidth: 8, frameHeight: 8 });
     this.load.spritesheet('fireball-explosion', 'assets/entities/fireball-explosion.png', { frameWidth: 16, frameHeight: 16 });
 
-    // Load props
+    // Cargar accesorios
     this.load.image('cloud1', 'assets/scenery/overworld/cloud1.png');
     this.load.image('cloud2', 'assets/scenery/overworld/cloud2.png');
     this.load.image('mountain1', 'assets/scenery/overworld/mountain1.png');
@@ -187,9 +186,9 @@ function preload() {
     this.load.image('castle', 'assets/scenery/castle.png');
     this.load.image('flag-mast', 'assets/scenery/flag-mast.png');
     this.load.image('final-flag', 'assets/scenery/final-flag.png');
-    this.load.image('sign', 'assets/scenery/');
+    this.load.image('sign', 'assets/scenery/sing.png');
 
-    // Load tubes
+    // Cargar tubos
     this.load.image('horizontal-tube', 'assets/scenery/horizontal-tube.png');
     this.load.image('horizontal-final-tube', 'assets/scenery/horizontal-final-tube.png');
     this.load.image('vertical-extralarge-tube', 'assets/scenery/vertical-large-tube.png');
@@ -198,13 +197,7 @@ function preload() {
     this.load.image('vertical-large-tube', 'assets/scenery/vertical-large-tube.png');
 
     
-    // Load HUD images
-    this.load.image('gear', 'assets/hud/gear.png');
-    this.load.image('settings-bubble', 'assets/hud/settings-bubble.png');
-
-    this.load.spritesheet('npc', 'assets/hud/npc.png', { frameWidth: 16, frameHeight: 24 });
-
-    // Load platform bricks and structures
+    // Cargar ladrillos de plataforma y estructuras
     this.load.image('floorbricks', 'assets/scenery/' + levelStyle + '/floorbricks.png');
     this.load.image('start-floorbricks', 'assets/scenery/overworld/floorbricks.png');
     this.load.image('block', 'assets/blocks/' + levelStyle + '/block.png');
@@ -213,9 +206,8 @@ function preload() {
     this.load.image('immovableBlock', 'assets/blocks/' + levelStyle + '/immovableBlock.png');
     this.load.spritesheet('brick-debris', 'assets/blocks/' + levelStyle + '/brick-debris.png', { frameWidth: 8, frameHeight: 8 });
     this.load.spritesheet('mistery-block', 'assets/blocks/' + levelStyle + '/misteryBlock.png', { frameWidth: 16, frameHeight: 16 });
-    this.load.spritesheet('custom-block', 'assets/blocks/overworld/customBlock.png', { frameWidth: 16, frameHeight: 16 });
 
-    // Load collectibles
+    // Cargar coleccionables
     this.load.spritesheet('coin', 'assets/collectibles/coin.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('ground-coin', 'assets/collectibles/underground/ground-coin.png', { frameWidth: 10, frameHeight: 14 });
     this.load.spritesheet('fire-flower', 'assets/collectibles/' + levelStyle + '/fire-flower.png', { frameWidth: 16, frameHeight: 16 });
@@ -223,7 +215,7 @@ function preload() {
     this.load.image('super-mushroom', 'assets/collectibles/super-mushroom.png');
 
 
-    // Load sounds and music
+    // Cargar sonidos y música
     this.load.audio('music', 'assets/sound/music/overworld/theme.mp3');
     this.load.audio('underground-music', 'assets/sound/music/underground/theme.mp3');
     this.load.audio('hurry-up-music', 'assets/sound/music/' + levelStyle +'/hurry-up-theme.mp3');
@@ -324,7 +316,7 @@ function create() {
 
     this.physics.world.setBounds(0, 0, worldWidth, screenHeight);
 
-    // Create camera
+    // Crear cámara
     this.cameras.main.setBounds(0, 0, worldWidth, screenHeight);
     this.cameras.main.isFollowing = false;
     //this.cameras.main.followOffset.set(startOffset / 6, 0);
@@ -356,7 +348,7 @@ function createControls() {
         // enable: true
     });
 
-    // Set control keys
+    // Establecer teclas de control
 
     const keyNames = ['JUMP', 'DOWN', 'LEFT', 'RIGHT', 'FIRE', 'PAUSE'];
     const defaultCodes = [Phaser.Input.Keyboard.KeyCodes.SPACE, Phaser.Input.Keyboard.KeyCodes.S, Phaser.Input.Keyboard.KeyCodes.A, Phaser.Input.Keyboard.KeyCodes.D, Phaser.Input.Keyboard.KeyCodes.Q, Phaser.Input.Keyboard.KeyCodes.ESC];
@@ -401,7 +393,7 @@ function drawWorld() {
     //Drawing scenery props
 
     //> Drawing the Sky
-    this.add.rectangle(screenWidth, 0,worldWidth, screenHeight, isLevelOverworld ? 0x8585FF : 0x000000).setOrigin(0).depth = -1;
+    this.add.rectangle(screenWidth, 0,worldWidth, screenHeight, isLevelOverworld ? 0x049cd8 : 0x000000).setOrigin(0).depth = -1;
 
     let propsY = screenHeight - platformHeight;
 
@@ -467,11 +459,11 @@ function drawWorld() {
 function generateLevel() {
     //> Creating the platform
 
-    // pieceStart will be the next platform piece start pos. This value will be modified after each execution
+    // pieceStart será la posición de inicio de la siguiente pieza de plataforma. Este valor se modificará después de cada ejecución
     let pieceStart = screenWidth;
-    // This will tell us if last generated piece of platform was empty, to avoid generating another empty piece next to it.
+    // Esto nos dirá si la última pieza generada de plataforma estaba vacía, para evitar generar otra pieza vacía junto a ella.
     let lastWasHole = 0;
-    // Structures will generate every 2/3 platform pieces
+    // Las estructuras se generarán cada 2/3 piezas de plataforma
     let lastWasStructure = 0;
 
     this.platformGroup = this.add.group();
@@ -489,7 +481,7 @@ function generateLevel() {
         this.blocksGroup.add(this.undergroundRoof);
     }
 
-    // Get the predefined map
+    // Obtener el mapa predefinido
     const mapData = getCurrentMapData();
     
     for (i=0; i <= platformPieces; i++) {
@@ -598,7 +590,7 @@ function generateLevel() {
         fallProtections[i].body.immovable = true;
     }
 
-    // Stablish properties for every generated structure
+    // Establecer propiedades para cada estructura generada
     let misteryBlocks = this.misteryBlocksGroup.getChildren();
     for (let i = 0; i < misteryBlocks.length; i++) {
         this.physics.add.existing(misteryBlocks[i]);
@@ -609,7 +601,7 @@ function generateLevel() {
         this.physics.add.collider(player, misteryBlocks[i], revealHiddenBlock, null, this);
     }
     
-    // Apply player collision with blocks
+    // Aplicar colisión del jugador con bloques
     let blocks = this.blocksGroup.getChildren();
     for (let i = 0; i < blocks.length; i++) {
         this.physics.add.existing(blocks[i]);
@@ -619,7 +611,7 @@ function generateLevel() {
         this.physics.add.collider(player, blocks[i], destroyBlock, null, this);
     }
 
-    // Apply player collision with immovable blocks
+    // Aplicar colisión del jugador con bloques inmóviles
     let constructionBlocks = this.constructionBlocksGroup.getChildren();
     for (let i = 0; i < constructionBlocks.length; i++) {
         this.physics.add.existing(constructionBlocks[i]);
@@ -630,7 +622,7 @@ function generateLevel() {
         this.physics.add.collider(player, constructionBlocks[i], destroyBlock, null, this);
     }
 
-    // Apply player collision with immovable blocks
+    // Aplicar colisión del jugador con bloques inmóviles
     let immovableBlocks = this.immovableBlocksGroup.getChildren();
     for (let i = 0; i < immovableBlocks.length; i++) {
         this.physics.add.existing(immovableBlocks[i]);
@@ -748,14 +740,14 @@ function drawStartScreen() {
     
     const screenCenterX = this.cameras.main.worldView.x + this.cameras.main.width / 2;
 
-    // Draw sky
-    this.add.rectangle(0, 0, screenWidth, screenHeight, 0x8585FF).setOrigin(0).depth = -1;
+    // Dibujar cielo
+    this.add.rectangle(0, 0, screenWidth, screenHeight, 0x049cd8).setOrigin(0).depth = -1;
 
     let platform = this.add.tileSprite(0, screenHeight, screenWidth / 2, platformHeight, 'start-floorbricks').setScale(2).setOrigin(0, 0.5);
     this.physics.add.existing(platform);
     platform.body.immovable = true;
     platform.body.allowGravity = false;
-    // Apply player collision with platform
+    // Aplicar colisión del jugador con plataforma
     this.physics.add.collider(player, platform);
 
     /*
@@ -772,7 +764,7 @@ function drawStartScreen() {
 
     this.add.image(screenWidth / 50, screenHeight / 3, 'cloud1').setScale(screenHeight / 1725);
 
-    this.add.image(screenWidth / 25, screenHeight / 10, 'sign').setOrigin(0).setScale(screenHeight / 350);
+    this.add.image(screenWidth / 25, screenHeight / 10, 'sign').setOrigin(0).setScale(screenHeight / 1500);
 
     let propsY = screenHeight - platformHeight;
 
@@ -785,21 +777,6 @@ function drawStartScreen() {
 
 
     this.add.tileSprite(screenWidth / 15, propsY, 350, 35, 'fence').setOrigin(0, 1).setScale(screenHeight / 863);
-
-    this.customBlock = this.add.sprite(screenCenterX, screenHeight - (platformHeight * 1.9),'custom-block').setScale(screenHeight / 345);
-    this.customBlock.anims.play('custom-block-default')
-    this.physics.add.collider(player, this.customBlock, function() {
-        if (player.body.blocked.up) showSettings.call(this);
-    }, null, this);
-    this.physics.add.existing(this.customBlock);
-    this.customBlock.body.allowGravity = false;
-    this.customBlock.body.immovable = true;
-
-    this.add.image(screenCenterX, screenHeight - (platformHeight * 1.9), 'gear').setScale(screenHeight / 13000).setInteractive().on('pointerdown', () => showSettings.call(this));
-
-    this.add.image(screenCenterX * 1.12, screenHeight - (platformHeight * 1.5), 'settings-bubble').setScale(screenHeight / 620);
-
-    this.add.sprite(screenCenterX * 1.07, screenHeight - platformHeight, 'npc').setOrigin(0.5, 1).setScale(screenHeight / 365).anims.play('npc-default', true);
 }
 
 function raiseFlag() {

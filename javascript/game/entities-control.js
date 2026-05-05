@@ -29,7 +29,7 @@ function createGoombas() {
         this.physics.add.overlap(player, goomba, checkGoombaCollision, null, this);
     }
 
-    // Create collision with fall protections to stop goombas from falling off the map
+    // Crear colisión con protecciones de caída para evitar que los goombas caigan fuera del mapa
     this.physics.add.collider(this.goombasGroup.getChildren(), this.immovableBlocksGroup.getChildren());
     this.physics.add.collider(this.goombasGroup.getChildren(), this.fallProtectionGroup.getChildren());
     this.physics.add.collider(this.goombasGroup.getChildren(), this.finalTrigger);
