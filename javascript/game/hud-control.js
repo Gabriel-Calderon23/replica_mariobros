@@ -1,3 +1,4 @@
+// Crea los elementos del HUD (puntaje, mejor puntaje y tiempo) en la pantalla
 function createHUD() {
     let posY = screenWidth / 23;
 
@@ -18,12 +19,14 @@ function createHUD() {
     updateScore.call(this);
 }
 
+// Actualiza el texto del puntaje mostrado en pantalla
 function updateScore() {
     if (!this.scoreText) return;
 
     this.scoreText.setText('MARIO\n' + score.toString().padStart(6, '0'));
 }
 
+// Cuenta regresiva del tiempo restante y activa sonidos de advertencia
 function updateTimer() {
     if (!this.timeLeftText || timeLeft <= 0 || this.timeLeftText.stopped || playerBlocked) return;
 
@@ -48,6 +51,7 @@ function updateTimer() {
     }, 500);
 }
 
+// Suma puntos al marcador y muestra el efecto visual en la posición del objeto origen
 function addToScore(num, originObject) {
     
     for (i = 1; i <= num; i++) {
@@ -59,6 +63,7 @@ function addToScore(num, originObject) {
     
     if (!originObject) return;
     
+    // Muestra cuánto puntaje se ganó sobre el objeto que causó el evento
     const textEffect = this.add.text(originObject.getBounds().x, originObject.getBounds().y, num, {
       fontFamily: 'pixel_nums',
       fontSize: (screenWidth / 150),
@@ -88,6 +93,7 @@ function addToScore(num, originObject) {
 
 // Funciones de game over
 
+// Muestra la pantalla de Game Over y guarda el nuevo high score si aplica
 function gameOverScreen(outOfTime=false) {
     if (localStorage.getItem('high-score') !== null) {
         if (localStorage.getItem('high-score') < score) {

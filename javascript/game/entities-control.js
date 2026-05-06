@@ -1,6 +1,8 @@
 
+// Velocidad horizontal de los goombas en el juego
 const goombasVelocityX = screenWidth / 19
 
+// Crea los goombas y configura sus colisiones y comportamiento físico
 function createGoombas() {
     this.goombasGroup = this.add.group();
 
@@ -10,6 +12,7 @@ function createGoombas() {
         goomba.anims.play('goomba-walk', true);
         goomba.smoothed = true;
         goomba.depth = 2;
+        // El goomba se mueve hacia la derecha o hacia la izquierda al azar
         if (Phaser.Math.Between(0, 10) <= 4) {
             goomba.setVelocityX(goombasVelocityX)
         } else {
@@ -26,6 +29,7 @@ function createGoombas() {
         let goombas = this.goombasGroup.getChildren();
         this.physics.add.collider(goomba, goombas);
         this.physics.add.collider(goomba, this.finalFlagMast);
+        // Detecta cuándo el jugador choca con el goomba
         this.physics.add.overlap(player, goomba, checkGoombaCollision, null, this);
     }
 
@@ -34,9 +38,11 @@ function createGoombas() {
     this.physics.add.collider(this.goombasGroup.getChildren(), this.fallProtectionGroup.getChildren());
     this.physics.add.collider(this.goombasGroup.getChildren(), this.finalTrigger);
 
+    // Intenta limpiar goombas inactivos periódicamente
     setInterval(clearGoombas.call(this), 250);
 }
 
+// Maneja la colisión entre el jugador y un goomba
 function checkGoombaCollision(player, goomba) {
 
     if (goomba.dead)
@@ -48,12 +54,14 @@ function checkGoombaCollision(player, goomba) {
         return;
 
     if (playerInvulnerable) {
+        // Si el jugador es invulnerable, solo se permite aplastar al goomba desde arriba
         if (!goombaBeingStomped) {
             return;
         }
     }
     
     if (goombaBeingStomped) {
+        // El goomba recibe daño cuando el jugador lo pisa
         goomba.anims.play('goomba-hurt', true);
         goomba.body.enable = false;
         this.goombasGroup.remove(goomba);
@@ -73,11 +81,13 @@ function checkGoombaCollision(player, goomba) {
         return;
     }
     
+    // Si el jugador no pisa al goomba, entonces recibe daño o pierde estado
     decreasePlayerState.call(this);
         
     return;
 }
 
+// Elimina goombas que quedaron sin velocidad correcta o atascados
 function clearGoombas() {
     let goombas = this.goombasGroup.getChildren();
 

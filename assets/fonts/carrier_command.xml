@@ -1,11 +1,16 @@
 <?xml version="1.0"?>
+<!-- Archivo de fuente bitmap para el juego -->
 <font>
+  <!-- Información general de la fuente -->
   <info face="Carrier Command" size="32" bold="0" italic="0" charset="" unicode="1" stretchH="100" smooth="0" aa="1" padding="0,0,0,0" spacing="1,1" outline="0"/>
+  <!-- Dimensiones y propiedades del atlas de caracteres -->
   <common lineHeight="32" base="32" scaleW="512" scaleH="256" pages="1" packed="0" alphaChnl="0" redChnl="4" greenChnl="4" blueChnl="4"/>
   <pages>
+    <!-- Imagen que contiene todos los caracteres de la fuente -->
     <page id="0" file="carrier_command_0.png" />
   </pages>
   <chars count="100">
+    <!-- Cada <char> describe la posición y tamaño de un caracter en la imagen -->
     <char id="32" x="194" y="160" width="18" height="1" xoffset="-6" yoffset="31" xadvance="38" page="0" chnl="15" />
     <char id="33" x="440" y="128" width="7" height="31" xoffset="12" yoffset="1" xadvance="38" page="0" chnl="15" />
     <char id="34" x="54" y="160" width="19" height="12" xoffset="6" yoffset="1" xadvance="38" page="0" chnl="15" />

@@ -1,4 +1,5 @@
 
+// Lanza una bola de fuego desde el jugador cuando está en modo fuego
 function throwFireball() {
     this.fireballSound.play();
     player.anims.play('fire-mario-throw');
@@ -15,6 +16,7 @@ function throwFireball() {
     let fireball = this.physics.add.sprite(player.getBounds().x + (player.width * 1.15), player.getBounds().y + (player.height / 1.25), 'fireball').setScale(screenHeight / 345);
     fireball.allowGravity = true;
     fireball.dead = false;
+    // Ajusta la animación y la dirección según hacia dónde mira el jugador
     if (playerController.direction.positive) {
         fireball.setVelocityX(velocityX * 1.3);
         fireball.isVelocityPositive = true;
@@ -45,6 +47,7 @@ function throwFireball() {
     }, 3000);
 }
 
+// Gestiona el choque entre la bola de fuego y una entidad (goomba)
 function fireballCollides(fireball, entitie) {
     if (fireball.exploded || fireball.dead)
         return;
@@ -76,6 +79,7 @@ function fireballCollides(fireball, entitie) {
     }, 1250);
 }
 
+// Reproduce la animación de explosión de la bola de fuego y la destruye al final
 function explodeFireball(fireball) {
     fireball.anims.play('fireball-explosion-1', true);
 
@@ -104,6 +108,7 @@ function explodeFireball(fireball) {
       }, 45)));    
 }
 
+// Actualiza la animación de la bola de fuego según su movimiento vertical
 function updateFireballAnimation(fireball) {
 
     if (fireball.exploded || fireball.dead)
@@ -128,6 +133,7 @@ function updateFireballAnimation(fireball) {
     }, 250);
 }
 
+// Controla el rebote de la bola de fuego contra bloques y plataformas
 function fireballBounce(fireball, collider) {
 
     if (collider.isPlatform && (fireball.body.blocked.left || fireball.body.blocked.right) || !collider.isPlatform && (fireball.body.blocked.left || fireball.body.blocked.right)) {

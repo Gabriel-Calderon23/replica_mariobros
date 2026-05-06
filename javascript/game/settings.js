@@ -1,6 +1,7 @@
 
 var keydownHandler;
 
+// Muestra el menú de configuración y pausa el juego
 function showSettings() {
     if (!this.settingsMenuOpen) {
         this.settingsMenuOpen = true;
@@ -13,6 +14,7 @@ function showSettings() {
     }
 }
 
+// Oculta el menú de configuración y reanuda el juego
 function hideSettings() {
     let settingsObjects = this.settingsMenuObjects.getChildren();
 
@@ -25,6 +27,7 @@ function hideSettings() {
     this.settingsMenuOpen = false;
 }
 
+// Dibuja el menú de configuración con opciones de música, efectos y controles
 function drawSettingsMenu() {
 
     if (this.settingsMenuCreated) {
@@ -38,6 +41,7 @@ function drawSettingsMenu() {
     this.settingsMenuCreated = true;
 
     this.settingsMenuObjects = this.add.group();
+
     
     //> Settings
 
@@ -236,6 +240,7 @@ function drawSettingsMenu() {
     });
 }
 
+// Aplica las configuraciones guardadas en localStorage (volumen, música, efectos)
 function applySettings() {
 
     if (localStorage.getItem('volume')) {

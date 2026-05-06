@@ -1,7 +1,10 @@
 
+// Velocidad horizontal usada por los hongos cuando salen de un bloque misterioso
 const mushroomsVelocityX = screenWidth / 15;
 
+// Revela un bloque oculto al golpearlo desde abajo
 function revealHiddenBlock(player, block) {
+    // Solo se activa si el jugador golpea el bloque desde abajo
     if (!player.body.blocked.up)
         return;
 
@@ -101,6 +104,7 @@ function revealHiddenBlock(player, block) {
     }
 }
 
+// Destruye un bloque cuando el jugador está grande y lo golpea desde abajo
 function destroyBlock(player, block) {
     if (!player.body.blocked.up)
         return;
@@ -132,6 +136,7 @@ function destroyBlock(player, block) {
     }
 }
 
+// Genera las partículas de ladrillo cuando un bloque se rompe
 function drawDestroyedBlockParticles(block) {
     let playerBounds = player.getBounds();
     let blockBounds = block.getBounds();
